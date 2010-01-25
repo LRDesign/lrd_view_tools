@@ -30,16 +30,16 @@ but will not overwrite existing files.
     The output defaults to <input type="text" name="#{field}"> for the 
     but can be overridden in a number of ways:
        
-    Override the form element:  
+    #Override the form element:  
     labeled_input(form, :boolean_field, :input => form.checkbox(:boolean_field))
 
-    Force a blank label:
+    #Force a blank label:
     labeled_input(form, :fieldname, :nolabel => true )
     
-    Alter label text:
+    #Alter label text:
     labeled_input(form, :fieldname, :text => "Other Text")
     
-    Add a comment after the input:
+    #Add a comment after the input:
     labeled_input(form, :password_confirmation, :comment => "Re-enter password")
                                                                       
 == Pass a block to partial:    
