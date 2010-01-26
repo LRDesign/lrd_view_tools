@@ -34,6 +34,6 @@ install_file File.join(lrd_view_tools_dir, 'stylesheets', 'sass', 'print.sass'),
 install_file File.join(lrd_view_tools_dir, 'images', 'blank.gif'), File.join(root_dir, 'public', 'images', 'blank.gif')
 install_file File.join(lrd_view_tools_dir, 'images', 'check.png'), File.join(root_dir, 'public', 'images', 'check.png')
 
-ensure_directory(File.join(root_dir, 'views', 'shared'))
+ensure_directory(File.join(root_dir, 'app', 'views', 'shared'))
 
-install_file File.join(lrd_view_tools_dir, 'views', 'shared', '_page_block.html.haml'), File.join(root_dir, 'views', 'shared', '_page_block.html.haml')
+install_file File.join(lrd_view_tools_dir, 'views', 'shared', '_block.html.haml'), File.join(root_dir, 'app','views', 'shared', '_block.html.haml')
