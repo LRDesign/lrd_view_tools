@@ -30,6 +30,14 @@ module LRD
       options.merge!(:body => capture(&block))
       concat(render(:partial => partial_name, :locals => options))
     end    
+    
+    # a standardized view helper that renders a box with an optional
+    # title.   The standard partial for it is in views/shared/_page_block.html.haml
+    def page_block(title = nil, options = {}, &block)
+      block_to_partial('shared/block', 
+        options.merge(:title => title), &block)
+    end
+    
           
     # pass { :nolabel => true } to replace the label with a spacer   
     # pass { :required => true } to dispay as a required field  

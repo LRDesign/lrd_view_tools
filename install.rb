@@ -14,11 +14,14 @@ def install_file(source,dest)
     puts "\tInstalling: #{dest}"
     File.copy(source, dest)
   end    
-end
-          
-dir = File.join(root_dir, 'public', 'stylesheets', 'sass')                                                            
-puts "\tEnsuring directory #{dir} "
-FileUtils.mkdir_p dir
+end                   
+
+def ensure_directory(dir)
+  puts "\tCreating directory #{dir} "
+  FileUtils.mkdir_p dir
+end          
+
+ensure_directory(File.join(root_dir, 'public', 'stylesheets', 'sass'))
 
 install_file File.join(lrd_view_tools_dir, 'stylesheets', 'reset.css'), File.join(root_dir, 'public', 'stylesheets', 'reset.sass')
 install_file File.join(lrd_view_tools_dir, 'stylesheets', 'sass', 'debug.sass'), File.join(root_dir, 'public', 'stylesheets', 'sass', 'debug.sass')
@@ -31,4 +34,6 @@ install_file File.join(lrd_view_tools_dir, 'stylesheets', 'sass', 'print.sass'),
 install_file File.join(lrd_view_tools_dir, 'images', 'blank.gif'), File.join(root_dir, 'public', 'images', 'blank.gif')
 install_file File.join(lrd_view_tools_dir, 'images', 'check.png'), File.join(root_dir, 'public', 'images', 'check.png')
 
+ensure_directory(File.join(root_dir, 'views', 'shared'))
 
+install_file File.join(lrd_view_tools_dir, 'views', 'shared', '_page_block.html.haml'), File.join(root_dir, 'views', 'shared', '_page_block.html.haml')
