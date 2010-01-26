@@ -34,8 +34,7 @@ module LRD
     # a standardized view helper that renders a box with an optional
     # title.   The standard partial for it is in views/shared/_page_block.html.haml
     def page_block(title = nil, options = {}, &block)
-      block_to_partial('shared/block', 
-        options.merge(:title => title), &block)
+      block_to_partial('shared/block', options.merge(:title => title), &block)
     end
     
           
