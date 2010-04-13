@@ -30,6 +30,7 @@ install_file File.join(lrd_view_tools_dir, 'stylesheets', 'sass', 'screen.sass')
 install_file File.join(lrd_view_tools_dir, 'stylesheets', 'sass', 'universal.sass'), File.join(root_dir, 'public', 'stylesheets', 'sass', 'universal.sass')
 install_file File.join(lrd_view_tools_dir, 'stylesheets', 'sass', 'utility.sass'), File.join(root_dir, 'public', 'stylesheets', 'sass', 'utility.sass')
 install_file File.join(lrd_view_tools_dir, 'stylesheets', 'sass', 'print.sass'), File.join(root_dir, 'public', 'stylesheets', 'sass', 'print.sass')
+install_file File.join(lrd_view_tools_dir, 'stylesheets', 'sass', 'type.sass'), File.join(root_dir, 'public', 'stylesheets', 'sass', 'type.sass')
 
 install_file File.join(lrd_view_tools_dir, 'images', 'blank.gif'), File.join(root_dir, 'public', 'images', 'blank.gif')
 install_file File.join(lrd_view_tools_dir, 'images', 'check.png'), File.join(root_dir, 'public', 'images', 'check.png')
