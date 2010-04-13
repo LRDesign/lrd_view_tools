@@ -14,6 +14,17 @@ module LRD
         }
         s.rewind
         s.read
-    end  
+    end                       
+    
+  
+    def debug_link(name)    
+      link_to name.titleize, '#', :onclick => "Element.toggle('#{name}_debug_info'); return false;"
+    end                     
+    def debug_block(name, &block)
+      content = capture(&block)     
+      title = content_tag(:h2, name.titleize)
+      concat(content_tag :fieldset, content, {:id => "#{name}_debug_info", :style => 'display: none;' } )
+    end
+    
   end
 end
