@@ -60,6 +60,11 @@ module LRD
 
       content_tag :div, (label + input + comment), { :class => cssclass }
     end
+    
+    # creates a submit button that lines up with a bunch of labeled_input fields
+    def unlabeled_submit(form)
+      labeled_input(form, nil, :input => form.submit, :nolabel => true)       
+    end
 
   end     
   
