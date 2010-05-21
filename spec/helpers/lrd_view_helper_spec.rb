@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-require 'lib/lrd_view_helper'
+require 'lrd_view_helper'
 
 describe LRD::ViewHelper do
   
