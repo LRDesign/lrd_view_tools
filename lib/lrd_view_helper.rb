@@ -42,17 +42,20 @@ module LRD
     # pass { :required => true } to dispay as a required field  
     # pass { :text => "foo" } to override the label text
     # pass { :class => 'foo'} to add 'foo' to the CSS class of the <div>
-    def labeled_input(form, field, options = {}) 
+    # 
+    # input_options hash gets passed directly to the input field
+    def labeled_input(form, field, options = {}, input_options = {}) 
       options[:text] = "&nbsp;" if options[:nolabel]
-      options.reverse_merge!(:text => nil, :size => 30, :required => false, :nolabel => false)
+      options.reverse_merge!(:text => nil,:required => false, :nolabel => false)
       options.merge!(:form => form, :field => field)     
+      input_options.reverse_merge!( :size => 30 )
 
       cssclass = "labeled_input"
       cssclass += " required" if options[:required]
       cssclass += " #{options[:class]}" if options[:class]
 
       unless input = options[:input]
-        input = form.text_field field, :size => options[:size]
+        input = form.text_field field, input_options
       end
 
       label = form.label field, options[:text]      
