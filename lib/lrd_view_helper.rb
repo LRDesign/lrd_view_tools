@@ -57,8 +57,12 @@ module LRD
       unless input = options[:input]
         input = form.text_field field, input_options
       end
-
-      label = form.label field, options[:text]      
+      
+      if field.blank?
+        label = content_tag :label, ""
+      else
+        label = form.label field, options[:text]      
+      end
       comment = options[:comment] ? content_tag( :span, { :class => 'comment' } ) { options[:comment] }  : ""
 
       content_tag :div, (label + input + comment), { :class => cssclass }
