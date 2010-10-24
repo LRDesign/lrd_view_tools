@@ -40,4 +40,3 @@ install_file File.join(lrd_view_tools_dir, 'images', 'check.png'), File.join(roo
 ensure_directory(File.join(root_dir, 'app', 'views', 'shared'))
 
 install_file File.join(lrd_view_tools_dir, 'views', 'shared', '_block.html.haml'), File.join(root_dir, 'app','views', 'shared', '_block.html.haml')
-install_file File.join(lrd_view_tools_dir, 'views', 'layouts', '_debug.html.haml'), File.join(root_dir, 'app','views', 'layouts', '_debug.html.haml')
