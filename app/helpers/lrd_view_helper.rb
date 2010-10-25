@@ -28,7 +28,7 @@ module LRD
       end   
 
       options.merge!(:body => capture(&block))
-      concat(render(:partial => partial_name, :locals => options))
+      render(:partial => partial_name, :locals => options)
     end    
 
     # a standardized view helper that renders a box with an optional
