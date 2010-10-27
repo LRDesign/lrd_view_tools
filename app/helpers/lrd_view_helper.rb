@@ -69,8 +69,12 @@ module LRD
     end
     
     # creates a submit button that lines up with a bunch of labeled_input fields
-    def unlabeled_submit(form)
-      labeled_input(form, nil, :input => form.submit, :nolabel => true).html_safe
+    def unlabeled_submit(form, text = nil)
+      if text
+        labeled_input(form, nil, :input => form.submit(text), :nolabel => true).html_safe
+      else  
+        labeled_input(form, nil, :input => form.submit, :nolabel => true).html_safe
+      end
     end
 
   end     
