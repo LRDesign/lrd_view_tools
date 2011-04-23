@@ -38,7 +38,9 @@ module LRD
         input = input_for_labeled_input(object_name, method, options)
       end
 
-      if text = options.delete(:text)
+      if object_name.blank? or method.blank?
+        label = "<label>&nbsp;</label>".html_safe
+      elsif text = options.delete(:text)
         label = label(object_name, method, text, options)
       else
         label = label(object_name, method, options)
@@ -88,7 +90,7 @@ module LRD
       when "range"
         input = range_field(    object_name, method, options)
       when "submit"
-        input = submit(         options[:submit_text], options)
+        input = submit_tag(     options[:submit_text], options)
       else
         raise "labeled_input input_type #{input_type} is not a valid type!"
       end
@@ -101,7 +103,7 @@ module LRD
 
     # creates a submit button that lines up with a bunch of labeled_input fields
     def unlabeled_submit(text = nil)
-      labeled_input(nil, :input_type => :submit, :submit_text => text)
+      labeled_input(nil, nil, :input_type => :submit, :submit_text => text)
     end
   end
 end
@@ -143,6 +145,9 @@ end
 module LRD::FormBuilder
   def labeled_input(method, options = {})
     @template.labeled_input(@object_name, method, objectify_options(options))
+  end
+  def unlabeled_submit(text = nil)
+    @template.unlabeled_submit(text)
   end
 end
 
