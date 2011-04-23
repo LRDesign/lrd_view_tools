@@ -1,4 +1,6 @@
 require 'spec/spec_helper'
+require File.join(File.dirname(__FILE__), '..', 'lib','app', 'helpers', 'lrd_form_helper')
+ActionView::Helpers::FormHelper.send(:include, LRD::FormHelper)
 
 describe "form_for().labelled_input", :type => :view do
   it "should render an inline template" do
@@ -17,6 +19,8 @@ describe "form_for().labelled_input", :type => :view do
          <%= f.labeled_input(:login) %>
       <%- end -%>
     EOTEMPLATE
+    p "Rendered is: ", rendered
     rendered.should_not be_nil
+
   end
 end

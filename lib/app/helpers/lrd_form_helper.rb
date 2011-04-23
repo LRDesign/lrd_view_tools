@@ -1,9 +1,6 @@
-p "Loading LRD::FormHelper File"
 
 module LRD
   module FormHelper
-
-    p "Defining LRD::FormHelper Module"
 
     def self.included(arg)
       p "LRD::FormHelper included in  #{arg}"
@@ -45,7 +42,6 @@ module LRD
       else
         label = label(object_name, method, options)
       end
-      p "divclass is #{divclass}"
       content_tag(:div, (label + input + comment), { :class => divclass })
     end
 
