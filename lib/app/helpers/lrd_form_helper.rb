@@ -30,10 +30,11 @@ module LRD
       divclass = labeled_input_divclass(options)
       comment = comment_for_labeled_input(options.delete(:comment))
       if block_given?
-        input = yield
+        input = capture(&block)
       else
         input = input_for_labeled_input(object_name, method, options)
       end
+
 
       if object_name.blank? or method.blank?
         label = "<label>&nbsp;</label>".html_safe
@@ -139,8 +140,8 @@ end
 #
 
 module LRD::FormBuilder
-  def labeled_input(method, options = {})
-    @template.labeled_input(@object_name, method, objectify_options(options))
+  def labeled_input(method, options = {}, &block)
+    @template.labeled_input(@object_name, method, objectify_options(options), &block)
   end
   def unlabeled_submit(text = nil)
     @template.unlabeled_submit(text)
