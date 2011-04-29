@@ -13,14 +13,31 @@ describe "form_for().labelled_input", :type => :view do
     mock_model("User", :login => "Username")
   end
 
-  it "should render a labeled_input successfully" do
-    render(:inline => <<-EOTEMPLATE, :locals => { :user => user })
+  let :template do
+    <<-EOTEMPLATE
       <%= form_for(user) do |f| %>
          <%= f.labeled_input(:login) %>
       <%- end -%>
     EOTEMPLATE
-    p "Rendered is: ", rendered
-    rendered.should_not be_nil
-
   end
+
+  describe "with default type" do
+    it "should render successfully" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should_not be_nil
+    end
+
+    it "should have a label" do
+      render(:inline => template, :locals => { :user => user })
+      # p "Rendered is: ", rendered
+      # rendered.should have_css('label')
+      rendered.should =~ /<label/
+    end
+
+    it "should have a text input" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should =~ /<input/
+    end
+  end
+
 end
