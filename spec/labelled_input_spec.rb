@@ -30,8 +30,8 @@ describe "form_for().labelled_input", :type => :view do
     it "should have a label" do
       render(:inline => template, :locals => { :user => user })
       # p "Rendered is: ", rendered
-      # rendered.should have_css('label')
-      rendered.should =~ /<label/
+      rendered.should have_css('label')
+      # rendered.should =~ /<label/
     end
 
     it "should have a text input" do
