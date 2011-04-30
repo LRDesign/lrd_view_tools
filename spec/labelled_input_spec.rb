@@ -13,15 +13,16 @@ describe "form_for().labelled_input", :type => :view do
     mock_model("User", :login => "Username")
   end
 
-  let :template do
-    <<-EOTEMPLATE
-      <%= form_for(user) do |f| %>
-         <%= f.labeled_input(:login) %>
-      <%- end -%>
-    EOTEMPLATE
-  end
 
   describe "with default type" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:login) %>
+        <%- end -%>
+      EOTEMPLATE
+    end
+
     it "should render successfully" do
       render(:inline => template, :locals => { :user => user })
       rendered.should_not be_nil
@@ -29,15 +30,30 @@ describe "form_for().labelled_input", :type => :view do
 
     it "should have a label" do
       render(:inline => template, :locals => { :user => user })
-      # p "Rendered is: ", rendered
-      rendered.should have_css('label')
-      # rendered.should =~ /<label/
+      rendered.should have_xpath('//label')
     end
 
     it "should have a text input" do
       render(:inline => template, :locals => { :user => user })
-      rendered.should =~ /<input/
+      rendered.should have_xpath('//input')
     end
   end
+
+  describe "with type text_area" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:login, :type => 'text_area') %>
+        <%- end -%>
+      EOTEMPLATE
+    end
+
+    it "should have a text area" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath('//textarea')
+    end
+  end
+
+
 
 end
