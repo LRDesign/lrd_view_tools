@@ -35,7 +35,6 @@ module LRD
         input = input_for_labeled_input(object_name, method, options)
       end
 
-
       if object_name.blank? or method.blank?
         label = "<label>&nbsp;</label>".html_safe
       elsif text = options.delete(:text)
