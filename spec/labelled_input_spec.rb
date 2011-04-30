@@ -43,7 +43,7 @@ describe "form_for().labelled_input", :type => :view do
     let :template do
       <<-EOTEMPLATE
         <%= form_for(user) do |f| %>
-           <%= f.labeled_input(:login, :input_type => 'text_area') %>
+           <%= f.labeled_input(:login, :type => 'text_area') %>
         <%- end -%>
       EOTEMPLATE
     end
