@@ -14,7 +14,7 @@ module LRD
     # pass  :text => "foo"  to override the label text
     # pass  :divclass => 'foo' to add 'foo' to the CSS class of the <div>
     # pass  :comment => "text"  to append a span.comment with text after the input
-    # pass  :input_type => 'password' } to use a password_field instead of a text_field
+    # pass  :type => 'password' } to use a password_field instead of a text_field
     #    (also supported: text, passsword, hidden, file, text_area, search, telephone, url
     #     email, range, submit)
     #
@@ -66,6 +66,7 @@ module LRD
       if required = options.delete(:required)
         options[:class] = (options[:class] or '') + " required"
       end
+      submit_text = options.delete(:submit_text)
 
       case input_type = options.delete(:type).to_s
       when "text", ""
@@ -91,20 +92,31 @@ module LRD
       when "range"
         input = range_field(    object_name, method, options)
       when "submit"
-        input = submit_tag(     options[:submit_text], options)
+        input = submit_tag(     submit_text, options)
       else
         raise "labeled_input input_type #{input_type} is not a valid type!"
       end
       input
     end
 
+    # Shortcut for a version of labeled_input that suppresses the
+    # label text.   Just calls labeled_input with :label => false.
     def unlabeled_input(object_name, method, options)
       labeled_input(object_name, method, options.merge!(:label => false))
     end
 
     # creates a submit button that lines up with a bunch of labeled_input fields
+    # Pass a single argument to override the default text of the submit button.
+    #
+    # ==== Examples (in HAML):
+    #   - form_for(@user) do
+    #     = f.unlabeled_submit("Click Me")
+    #   # => <div class='labeled_input'>
+    #   # =>   <label> </label>
+    #   # =>   <input type='submit' name='[]' value='Click Me' />
+    #   # => </div>
     def unlabeled_submit(text = nil)
-      labeled_input(nil, nil, :input_type => :submit, :submit_text => text)
+      labeled_input(nil, nil, :type => :submit, :submit_text => text)
     end
   end
 end

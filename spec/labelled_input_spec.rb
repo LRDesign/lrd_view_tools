@@ -173,6 +173,42 @@ describe "form_for().labelled_input", :type => :view do
     end
   end
 
+  describe "with type :submit" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:bio, :type => :submit) %>
+        <%- end -%>
+      EOTEMPLATE
+    end
+
+    it "should have a submit button" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath("//div[@class='labeled_input']/input[@type='submit']")
+    end
+
+    describe "and submit text" do
+      let :template do
+        <<-EOTEMPLATE
+          <%= form_for(user) do |f| %>
+             <%= f.labeled_input(:bio, :type => :submit, :submit_text => 'Click Me') %>
+          <%- end -%>
+        EOTEMPLATE
+      end
+
+      it "should have a submit button with text" do
+        render(:inline => template, :locals => { :user => user })
+        rendered.should have_xpath("//div[@class='labeled_input']/input[@type='submit'][@value='Click Me']")
+      end
+
+      it "should not put a 'submit_text' attribute in the other tags" do
+        render(:inline => template, :locals => { :user => user })
+        rendered.should_not have_xpath("//*[@submit_text]")
+      end
+    end
+  end
+
+
   describe "with type :text_area" do
     let :template do
       <<-EOTEMPLATE
@@ -187,6 +223,7 @@ describe "form_for().labelled_input", :type => :view do
       rendered.should have_xpath('//textarea')
     end
   end
+
 
   describe "with type :textarea" do
     let :template do
