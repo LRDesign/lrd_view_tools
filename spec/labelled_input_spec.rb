@@ -10,7 +10,7 @@ describe "form_for().labelled_input", :type => :view do
 
   let :user do
     view.stub!(:user_path => "#")
-    mock_model("User", :login => "Username")
+    mock_model("User", :login => "Username", :bio => "This is my story", :phone => "626-111-2222")
   end
 
 
@@ -43,7 +43,7 @@ describe "form_for().labelled_input", :type => :view do
     let :template do
       <<-EOTEMPLATE
         <%= form_for(user) do |f| %>
-           <%= f.labeled_input(:login, :type => 'text_area') %>
+           <%= f.labeled_input(:bio, :type => 'text_area') %>
         <%- end -%>
       EOTEMPLATE
     end
@@ -58,7 +58,7 @@ describe "form_for().labelled_input", :type => :view do
     let :template do
       <<-EOTEMPLATE
         <%= form_for(user) do |f| %>
-           <%= f.labeled_input(:login, :type => :textarea) %>
+           <%= f.labeled_input(:bio, :type => :textarea) %>
         <%- end -%>
       EOTEMPLATE
     end
@@ -69,7 +69,20 @@ describe "form_for().labelled_input", :type => :view do
     end
   end
 
+  describe "with type :telephane" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:phone, :type => :telephone) %>
+        <%- end -%>
+      EOTEMPLATE
+    end
+    it "should have a telephone input" do
+      render(:inline => template, :locals => { :user=> user })
+      rendered.should have_xpath('//input[@type="tel"]')
+    end
 
+  end
 
 
 end
