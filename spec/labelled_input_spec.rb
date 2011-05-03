@@ -44,6 +44,28 @@ describe "form_for().labelled_input", :type => :view do
     end
   end
 
+  describe "with :required => true" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:login, :required => true) %>
+        <%- end -%>
+      EOTEMPLATE
+    end
+
+    it "should set the div class to required" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath("//div[contains(@class,'required')][contains(@class, 'labeled_input')]")
+    end
+
+    it "should set the input class to required" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath("//div[contains(@class,'required')]/input[contains(@class, 'required')]")
+    end
+
+  end
+
+
   describe "with label text specified" do
     let :template do
       <<-EOTEMPLATE

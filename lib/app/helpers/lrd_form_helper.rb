@@ -64,6 +64,10 @@ module LRD
     end
 
     def input_for_labeled_input(object_name, method, options)
+      if required = options.delete(:required)
+        options[:class] = (options[:class] or '') + " required"
+      end
+
       case input_type = options.delete(:type).to_s
       when "text", ""
         input = text_field(     object_name, method, options)
