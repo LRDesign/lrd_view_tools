@@ -39,7 +39,7 @@ describe "form_for().labelled_input", :type => :view do
     end
   end
 
-  describe "with type text_area" do
+  describe "with type :text_area" do
     let :template do
       <<-EOTEMPLATE
         <%= form_for(user) do |f| %>
@@ -53,6 +53,22 @@ describe "form_for().labelled_input", :type => :view do
       rendered.should have_xpath('//textarea')
     end
   end
+
+  describe "with type :textarea" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:login, :type => :textarea) %>
+        <%- end -%>
+      EOTEMPLATE
+    end
+
+    it "should have a text area" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath('//textarea')
+    end
+  end
+
 
 
 
