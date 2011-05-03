@@ -44,6 +44,34 @@ describe "form_for().labelled_input", :type => :view do
     end
   end
 
+  describe "with block passed" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:login) do %>
+             <select name='foo'>
+                <option value='bar'>Bar</option>
+                <option value='baz'>Baz</option>
+                <option value='bletch'>Bletch</option>
+             </select>
+          <%- end -%>
+        <%- end -%>
+      EOTEMPLATE
+    end
+
+    it "should not generate the default input" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should_not have_xpath("//div[@class='labeled_input']/input")
+    end
+
+    it "should insert the block's elements" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath(
+        "//div[@class='labeled_input']/select[@name='foo'][count(option)=3]"
+      )
+    end
+  end
+
   describe "with :required => true" do
     let :template do
       <<-EOTEMPLATE
