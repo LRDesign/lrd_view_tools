@@ -3,7 +3,6 @@ module LRD
   module FormHelper
 
     def self.included(arg)
-      p "LRD::FormHelper included in  #{arg}"
       ActionView::Helpers::FormBuilder.send(:include, LRD::FormBuilder)
     end
 
