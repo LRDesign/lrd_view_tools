@@ -44,6 +44,36 @@ describe "form_for().labelled_input", :type => :view do
     end
   end
 
+  describe "with a comment specified" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:login, :comment => 'Reminder text') %>
+        <%- end -%>
+      EOTEMPLATE
+    end
+
+    it "should add a span for the comment" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath("//div/span[contains(@class, 'comment')][.='Reminder text']")
+    end
+
+    it "should not apply a comment attribute to the other elements" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should_not have_xpath("//label[@comment]")
+      rendered.should_not have_xpath("//input[@comment]")
+      rendered.should_not have_xpath("//div[@comment]")
+    end
+
+    it "should not apply a class 'comment' to the other elements" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should_not have_xpath("//label[contains(@class, 'comment')]")
+      rendered.should_not have_xpath("//input[contains(@class, 'comment')]")
+      rendered.should_not have_xpath("//div[contains(@class, 'comment')]")
+    end
+
+  end
+
   describe "with a divclass specified" do
     let :template do
       <<-EOTEMPLATE
@@ -63,7 +93,6 @@ describe "form_for().labelled_input", :type => :view do
       rendered.should_not have_xpath("//label[contains(@class, 'foobar')]")
       rendered.should_not have_xpath("//input[contains(@class, 'foobar')]")
     end
-
   end
 
   describe "with type :text_area" do
