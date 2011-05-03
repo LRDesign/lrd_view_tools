@@ -71,7 +71,7 @@ module LRD
         input = hidden_field(   object_name, method, options)
       when "file"
         input = file_field(     object_name, method, options)
-      when "text_area"
+      when "text_area", "textarea"
         input = text_area(      object_name, method, options)
       when "search"
         input = search_field(   object_name, method, options)
