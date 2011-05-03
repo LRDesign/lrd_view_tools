@@ -30,6 +30,7 @@ module LRD
       divclass = options.delete(:divclass)
       div_final_class = labeled_input_div_class(options, divclass)
       comment = comment_for_labeled_input(options.delete(:comment))
+      label_text = options.delete(:text)
       if block_given?
         input = capture(&block)
       else
@@ -38,8 +39,8 @@ module LRD
 
       if object_name.blank? or method.blank?
         label = "<label>&nbsp;</label>".html_safe
-      elsif text = options.delete(:text)
-        label = label(object_name, method, text, options)
+      elsif label_text =
+        label = label(object_name, method, label_text, options)
       else
         label = label(object_name, method, options)
       end
