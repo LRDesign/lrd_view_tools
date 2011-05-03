@@ -81,7 +81,7 @@ module LRD
         input = text_area(      object_name, method, options)
       when "search"
         input = search_field(   object_name, method, options)
-      when "telephone"
+      when "telephone", 'tel'
         input = telephone_field(object_name, method, options)
       when "url"
         input = url_field(      object_name, method, options)

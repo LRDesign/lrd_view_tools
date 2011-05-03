@@ -1,4 +1,4 @@
-=LRD ViewTools
+=LRD::ViewTools
 
 Standard view helpers and stylesheet defaults for Logical Reality Design
 Projects.
@@ -10,39 +10,49 @@ Add to Gemfile:
 
 and run 'bundle install'.
 
-Also, 'rails generate lrd_view_tools:install' will copy in default images,
-stylesheets, and helper partials to the rails app.
-
 == Simple labeled inputs for forms:
 
-  labeled_input(form, field)
+  form.labeled_input(field)
 
   Produces a <label> <input> pair for a text field in a standard form helper.
-  The included stylesheet forms.sass will format the label as an 8-em wide
-  float to the left of the input.
+  The default LRD stylesheet (forms.sass) in all LRD projects will format the
+  label as an 8-em wide float to the left of the input (or may have been modified
+  on a per-project basis).
 
   Usage example:
-    form_for(@user) do |form
-      = labeled_input(form, :name)
-      = labeled_input(form, :email)
-      = labeled_input(form, nil, :input => form.submit("Save Changes"))
+    form_for(@user) do |f|
+      = f.labeled_input(:name)
+      = f.labeled_input(:email)
+      = f.labeled_input(:country) do
+        = f.select(:country, [ 'option 1', 'option 2'])
+      = f.unlabeled_submit
     end
 
   Options:
     The output defaults to <input type="text" name="#{field}"> for the
     but can be overridden in a number of ways:
 
-    #Override the form element:
-    labeled_input(form, :boolean_field, :input => form.checkbox(:boolean_field))
-
-    #Force a blank label:
-    labeled_input(form, :fieldname, :nolabel => true )
+    #Override the input element by passing a block:
+    f.labeled_input(:boolean_field) do
+      f.checkbox(:boolean_field))
 
     #Alter label text:
-    labeled_input(form, :fieldname, :text => "Other Text")
+    f.labeled_input(:fieldname, :text => "Other Text")
+
+    #Force a blank label:
+    f.labeled_input(:fieldname, :text => '' )
+
+    #Set to required - appends class 'required' to both the div and the input:
+    f.labeled_input(:fieldname, :required => 'true' )
 
     #Add a comment after the input:
-    labeled_input(form, :password_confirmation, :comment => "Re-enter password")
+    f.labeled_input(:password_confirmation, :comment => "Re-enter password")
+
+    #Change the input type to a textarea:
+    f.labeled_input(:description, :input_type => :text_area)    # or :textarea, both work
+
+    #Create a telephone input:
+    f.labeled_input(:description, :input_type => :tel)    # or :telephone, both work
 
 == Pass a block to partial:
 
