@@ -11,9 +11,9 @@ module LRD
     # block, pre-styled in LRD style.
     #
     # pass  :label => false  to suppress the label text.  (A label tag is still emitted.)
-    # pass  :required => true  to dispay as a required field
+    # pass  :required => true  to dispay as a required field (class required set on both the div and the input)
     # pass  :text => "foo"  to override the label text
-    # pass  :class => 'foo' to add 'foo' to the CSS class of the <div>
+    # pass  :divclass => 'foo' to add 'foo' to the CSS class of the <div>
     # pass  :comment => "text"  to append a span.comment with text after the input
     # pass  :input_type => 'password' } to use a password_field instead of a text_field
     #    (also supported: text, passsword, hidden, file, text_area, search, telephone, url
@@ -27,7 +27,8 @@ module LRD
     #   # =>   <input type='text' name='user[login]' id='user_login' value="#{@user.login}" />
     #   # => </div>
     def labeled_input(object_name, method, options = {}, &block)
-      divclass = labeled_input_divclass(options)
+      divclass = options.delete(:divclass)
+      div_final_class = labeled_input_div_class(options, divclass)
       comment = comment_for_labeled_input(options.delete(:comment))
       if block_given?
         input = capture(&block)
@@ -42,7 +43,7 @@ module LRD
       else
         label = label(object_name, method, options)
       end
-      content_tag(:div, (label + input + comment), { :class => divclass })
+      content_tag(:div, (label + input + comment), { :class => div_final_class })
     end
 
     def comment_for_labeled_input(text)
@@ -54,10 +55,10 @@ module LRD
     end
 
 
-    def labeled_input_divclass(options)
+    def labeled_input_div_class(options, divclass = nil)
       cssclass = "labeled_input"
       cssclass += " required" if options[:required]
-      cssclass += " #{options[:class]}" if options[:class]
+      cssclass += " #{divclass}" if divclass
       cssclass
     end
 

@@ -37,6 +37,33 @@ describe "form_for().labelled_input", :type => :view do
       render(:inline => template, :locals => { :user => user })
       rendered.should have_xpath('//input')
     end
+
+    it "should have a div with class labeled_input" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath('//div[@class="labeled_input"]')
+    end
+  end
+
+  describe "with a divclass specified" do
+    let :template do
+      <<-EOTEMPLATE
+        <%= form_for(user) do |f| %>
+           <%= f.labeled_input(:login, :divclass => 'foobar') %>
+        <%- end -%>
+      EOTEMPLATE
+    end
+
+    it "should apply the appropriate class to the div" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should have_xpath("//div[contains(@class, 'foobar')]")
+    end
+
+    it "should not apply the divclass to the input or label" do
+      render(:inline => template, :locals => { :user => user })
+      rendered.should_not have_xpath("//label[contains(@class, 'foobar')]")
+      rendered.should_not have_xpath("//input[contains(@class, 'foobar')]")
+    end
+
   end
 
   describe "with type :text_area" do
