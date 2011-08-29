@@ -4,8 +4,12 @@ require File.join(File.dirname(__FILE__), 'app', 'helpers', 'lrd_form_helper')
 
 module LRD::DevTools
   class Railtie < Rails::Railtie
-    ActionController::Base.helper(LRD::ViewHelper)
-    ActionController::Base.helper(LRD::DebugHelper)
-    ActionView::Helpers::FormHelper.send(:include, LRD::FormHelper)
+    initializer "LRDDevTools" do
+      ActionController::Base.helper(LRD::ViewHelper)
+      ActionController::Base.helper(LRD::DebugHelper)
+      ActionView::Helpers::FormHelper.send(:include, LRD::FormHelper)
+      ActionView::Base.send(:include, LRD::FormHelper)
+      ActionView::Helpers::FormBuilder.send(:include, LRD::FormBuilder)
+    end
   end
 end

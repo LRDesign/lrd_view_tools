@@ -2,9 +2,6 @@
 module LRD
   module FormHelper
 
-    def self.included(arg)
-      ActionView::Helpers::FormBuilder.send(:include, LRD::FormBuilder)
-    end
 
     # Returns a <div> containing a label, an input, and an option comment
     # block, pre-styled in LRD style.
