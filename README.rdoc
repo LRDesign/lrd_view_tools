@@ -34,7 +34,7 @@ and run 'bundle install'.
 
     #Override the input element by passing a block:
     f.labeled_input(:boolean_field) do
-      f.checkbox(:boolean_field))
+      f.check_box(:boolean_field))
 
     #Alter label text:
     f.labeled_input(:fieldname, :text => "Other Text")
