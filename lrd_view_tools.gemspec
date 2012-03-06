@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = %q{lrd_view_tools}
-  s.version = "0.1.2"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evan Dorn"]
-  s.date = %q{2011-04-27}
+  s.date = %q{2012-03-06}
   s.summary = %q{View helpers and defaults for LRD projects.}
   s.description = %q{View helpers and defaults for LRD projects.  Compatible with Rails 3.x. Don't even bother trying with Rails 2.x or before.'}
   s.email = %q{evan@lrdesign.com}

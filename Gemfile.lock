@@ -1,10 +1,9 @@
 PATH
   remote: .
   specs:
-    lrd_view_tools (0.0.1)
+    lrd_view_tools (0.1.2)
 
 GEM
-  remote: http://judson:hEi4lOra@gems.lrdesign.com/
   remote: http://gemcutter.org/
   remote: http://gems.github.com/
   specs:
@@ -31,6 +30,7 @@ GEM
       abstract (>= 1.0.0)
     i18n (0.5.0)
     linecache (0.43)
+    nokogiri (1.5.0)
     rack (1.2.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
@@ -62,6 +62,10 @@ GEM
       linecache (>= 0.3)
     thor (0.14.6)
     tzinfo (0.3.24)
+    webrat (0.7.3)
+      nokogiri (>= 1.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5.3)
 
 PLATFORMS
   ruby
@@ -71,3 +75,4 @@ DEPENDENCIES
   rspec
   rspec-rails
   ruby-debug
+  webrat

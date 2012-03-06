@@ -112,8 +112,8 @@ module LRD
     #   # =>   <label> </label>
     #   # =>   <input type='submit' name='[]' value='Click Me' />
     #   # => </div>
-    def unlabeled_submit(text = nil)
-      labeled_input(nil, nil, :type => :submit, :submit_text => text)
+    def unlabeled_submit(text = nil, options={})
+      labeled_input(nil, nil, options.merge!({:type => :submit, :submit_text => text}))
     end
   end
 end
@@ -156,8 +156,8 @@ module LRD::FormBuilder
   def labeled_input(method, options = {}, &block)
     @template.labeled_input(@object_name, method, objectify_options(options), &block)
   end
-  def unlabeled_submit(text = nil)
-    @template.unlabeled_submit(text)
+  def unlabeled_submit(text = nil, options={})
+    @template.unlabeled_submit(text, options)
   end
 end
 
